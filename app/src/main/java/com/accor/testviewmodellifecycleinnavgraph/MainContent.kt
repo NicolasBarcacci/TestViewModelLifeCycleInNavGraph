@@ -42,7 +42,7 @@ fun MainContent(
 }
 
 fun NavGraphBuilder.hotelNavGraph(navController: NavHostController) {
-    navigation(startDestination = HomeScreen, route = BookingFlow) {
+    navigation(startDestination = HotelScreen, route = BookingFlow) {
         composable(HotelScreen) {
             HotelScreen(navController)
         }
