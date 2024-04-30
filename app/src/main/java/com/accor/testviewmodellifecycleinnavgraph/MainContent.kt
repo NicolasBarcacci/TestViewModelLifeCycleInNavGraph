@@ -12,16 +12,14 @@ import com.accor.testviewmodellifecycleinnavgraph.home.HomeScreen
 import com.accor.testviewmodellifecycleinnavgraph.search.SearchScreen
 import com.accor.testviewmodellifecycleinnavgraph.subgraph.hotel.HotelScreen
 import com.accor.testviewmodellifecycleinnavgraph.subgraph.restaurant.RestaurantScreen
-import com.accor.testviewmodellifecycleinnavgraph.subgraph.room.RoomContent
 import com.accor.testviewmodellifecycleinnavgraph.subgraph.room.RoomScreen
 
 private const val HomeScreen = "HomeScreen"
 private const val SearchScreen = "SearchScreen"
-
 private const val HotelScreen = "HotelScreen"
 private const val RoomScreen = "RoomScreen"
 private const val RestaurantScreen = "RestaurantScreen"
-private const val BookingFlow = "bookingFlow"
+private const val BookingFlow = "BookingFlow"
 
 @Composable
 fun MainContent(
@@ -47,10 +45,10 @@ fun NavGraphBuilder.hotelNavGraph(navController: NavHostController) {
             HotelScreen(navController)
         }
         composable(RoomScreen) {
-            RestaurantScreen(navController)
+            RoomScreen(navController)
         }
         composable(RestaurantScreen) {
-            RoomScreen(navController)
+            RestaurantScreen(navController)
         }
     }
 }
@@ -67,10 +65,14 @@ fun NavController.navToBookingFlow() {
     this.navigate(BookingFlow)
 }
 
+fun NavController.navToHotelScreen() {
+    this.navigate(HotelScreen)
+}
+
 fun NavController.navToRestaurantScreen() {
     this.navigate(RestaurantScreen)
 }
 
 fun NavController.navToRoomScreen() {
-    this.navigate(RestaurantScreen)
+    this.navigate(RoomScreen)
 }

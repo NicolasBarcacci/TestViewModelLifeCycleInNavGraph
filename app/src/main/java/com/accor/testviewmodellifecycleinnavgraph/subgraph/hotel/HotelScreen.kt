@@ -3,6 +3,7 @@ package com.accor.testviewmodellifecycleinnavgraph.subgraph.hotel
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.accor.testviewmodellifecycleinnavgraph.navToHomeScreen
 import com.accor.testviewmodellifecycleinnavgraph.navToRestaurantScreen
 import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonView
 
@@ -20,8 +21,10 @@ fun HotelContent(
     hotelViewModel: HotelViewModel,
 ) {
     CommonView(
-        screenName = "HotelScreen", textName = "navToRestaurantScreen"
-    ) {
-        navController.navToRestaurantScreen()
-    }
+        screenName = "HotelScreen",
+        navNext = "navToRestaurantScreen",
+        navNextClick = { navController.navToRestaurantScreen() },
+        navVertical = "navToHomeScreen",
+        navVerticalClick = { navController.navToHomeScreen() }
+    )
 }
