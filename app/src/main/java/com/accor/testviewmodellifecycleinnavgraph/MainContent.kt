@@ -17,18 +17,18 @@ fun MainContent() {
 
     NavHost(navController = navController, startDestination = HomeScreen) {
         composable(HomeScreen) {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(SearchScreen) {
-            SearchScreen()
+            SearchScreen(navController)
         }
     }
 }
 
-fun NavController.navToTestScreen() {
+fun NavController.navToHomeScreen() {
     this.navigate(HomeScreen)
 }
 
-fun NavController.navToSearchScren() {
+fun NavController.navToSearchScreen() {
     this.navigate(SearchScreen)
 }
