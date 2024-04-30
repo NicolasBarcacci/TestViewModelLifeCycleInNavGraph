@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.accor.testviewmodellifecycleinnavgraph.testview.TestScreen
+import com.accor.testviewmodellifecycleinnavgraph.home.TestScreen
 
 private const val TestScreen = "TestScreen"
 

@@ -1,4 +1,4 @@
-package com.accor.testviewmodellifecycleinnavgraph.testview
+package com.accor.testviewmodellifecycleinnavgraph.home
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -6,13 +6,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun TestScreen() {
-    val testViewModel: TestViewModel = viewModel()
-    TestContent(testViewModel = testViewModel)
+    val homeViewModel: HomeViewModel = viewModel()
+    TestContent(homeViewModel = homeViewModel)
 }
 
 @Composable
 fun TestContent(
-    testViewModel: TestViewModel,
+    homeViewModel: HomeViewModel,
 ) {
     Text("TestView")
 }

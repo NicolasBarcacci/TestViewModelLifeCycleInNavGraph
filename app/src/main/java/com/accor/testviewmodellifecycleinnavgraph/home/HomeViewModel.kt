@@ -1,9 +1,9 @@
-package com.accor.testviewmodellifecycleinnavgraph.testview
+package com.accor.testviewmodellifecycleinnavgraph.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 
-class TestViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     init {
         Log.d("MYTAG", "TestViewModel")
