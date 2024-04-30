@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 class HomeViewModel : ViewModel() {
 
     init {
-        Log.d("MYTAG", "TestViewModel")
+        Log.d("MYTAG", "HomeViewModel - init")
     }
 
     override fun onCleared() {
-        Log.d("MYTAG", "onCleared")
+        Log.d("MYTAG", "HomeViewModel - onCleared")
         super.onCleared()
     }
 }

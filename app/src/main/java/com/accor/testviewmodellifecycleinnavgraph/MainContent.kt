@@ -5,21 +5,30 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.accor.testviewmodellifecycleinnavgraph.home.TestScreen
+import com.accor.testviewmodellifecycleinnavgraph.home.HomeScreen
+import com.accor.testviewmodellifecycleinnavgraph.search.SearchScreen
 
-private const val TestScreen = "TestScreen"
+private const val HomeScreen = "HomeScreen"
+private const val SearchScreen = "SearchScren"
 
 @Composable
 fun MainContent() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = TestScreen) {
-        composable(TestScreen) {
-            TestScreen()
+    NavHost(navController = navController, startDestination = HomeScreen) {
+        composable(HomeScreen) {
+            HomeScreen()
+        }
+        composable(SearchScreen) {
+            SearchScreen()
         }
     }
 }
 
 fun NavController.navToTestScreen() {
-    this.navigate(TestScreen)
+    this.navigate(HomeScreen)
+}
+
+fun NavController.navToSearchScren() {
+    this.navigate(SearchScreen)
 }

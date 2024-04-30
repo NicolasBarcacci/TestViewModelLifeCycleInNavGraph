@@ -5,14 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun TestScreen() {
+fun HomeScreen() {
     val homeViewModel: HomeViewModel = viewModel()
-    TestContent(homeViewModel = homeViewModel)
+    HomeContent(homeViewModel = homeViewModel)
 }
 
 @Composable
-fun TestContent(
+fun HomeContent(
     homeViewModel: HomeViewModel,
 ) {
-    Text("TestView")
+    Text("HomeScreen")
 }
