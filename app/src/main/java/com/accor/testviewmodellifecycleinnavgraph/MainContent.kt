@@ -12,15 +12,17 @@ private const val HomeScreen = "HomeScreen"
 private const val SearchScreen = "SearchScren"
 
 @Composable
-fun MainContent() {
+fun MainContent(
+    activity: MainActivity,
+) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = HomeScreen) {
         composable(HomeScreen) {
-            HomeScreen(navController)
+            HomeScreen(navController = navController)
         }
         composable(SearchScreen) {
-            SearchScreen(navController)
+            SearchScreen(activity = activity, navController = navController)
         }
     }
 }
