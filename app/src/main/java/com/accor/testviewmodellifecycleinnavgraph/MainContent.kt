@@ -32,7 +32,7 @@ fun MainContent(
             HomeScreen(navController = navController)
         }
         composable(SearchScreen) {
-            SearchScreen(activity = activity, navController = navController)
+            SearchScreen(viewModelStoreOwner = activity, navController = navController)
         }
 
         hotelNavGraph(navController)
@@ -48,7 +48,10 @@ fun NavGraphBuilder.hotelNavGraph(navController: NavHostController) {
             RoomScreen(navController)
         }
         composable(RestaurantScreen) {
-            RestaurantScreen(navController)
+            RestaurantScreen(
+                navController.getViewModelStoreOwner(TODO()),
+                navController
+            )
         }
     }
 }

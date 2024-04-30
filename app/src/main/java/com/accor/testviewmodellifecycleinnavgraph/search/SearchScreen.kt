@@ -1,7 +1,7 @@
 package com.accor.testviewmodellifecycleinnavgraph.search
 
-import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.accor.testviewmodellifecycleinnavgraph.navToBookingFlow
@@ -10,11 +10,11 @@ import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonView
 
 @Composable
 fun SearchScreen(
-    activity: ComponentActivity,
+    viewModelStoreOwner: ViewModelStoreOwner,
     navController: NavController
 ) {
     val searchViewModel: SearchViewModel = viewModel(
-        viewModelStoreOwner = activity,
+        viewModelStoreOwner = viewModelStoreOwner,
     )
     SearchContent(
         navController = navController,
@@ -28,7 +28,7 @@ fun SearchContent(
     searchViewModel: SearchViewModel,
 ) {
     CommonView(
-        screenName = "SearchScreen",
+        screenName = "SearchScreen (Linked to Activity LifeCycle)",
         navNext = "navToHomeScreen",
         navNextClick = { navController.navToHomeScreen() },
         navVertical = "navToSubgraph",
