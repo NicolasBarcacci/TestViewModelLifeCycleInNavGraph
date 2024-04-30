@@ -15,18 +15,24 @@ fun CommonView(
     modifier: Modifier = Modifier,
     screenName: String,
     navNext: String,
-    navNextClick: () -> Unit,
     navVertical: String,
-    navVerticalClick: () -> Unit,
+    onClickListener: (CommonViewClickListener) -> Unit
 ) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text(screenName)
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = navNextClick) {
+        Button(onClick = { onClickListener(CommonViewClickListener.HorizontalNavigationClick) }) {
             Text(text = navNext)
         }
-        Button(onClick = navVerticalClick) {
+        Button(onClick = { onClickListener(CommonViewClickListener.VerticalNavigationClick) }) {
             Text(text = navVertical)
         }
     }
 }
+
+sealed interface CommonViewClickListener {
+    data object VerticalNavigationClick : CommonViewClickListener
+
+    data object HorizontalNavigationClick : CommonViewClickListener
+}
+

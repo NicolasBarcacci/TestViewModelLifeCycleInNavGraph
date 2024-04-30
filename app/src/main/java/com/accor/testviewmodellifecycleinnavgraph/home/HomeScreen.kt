@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import com.accor.testviewmodellifecycleinnavgraph.navToBookingFlow
 import com.accor.testviewmodellifecycleinnavgraph.navToSearchScreen
 import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonView
+import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonViewClickListener
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -17,15 +18,22 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun HomeContent(
+private fun HomeContent(
     navController: NavController,
     homeViewModel: HomeViewModel,
 ) {
     CommonView(
         screenName = "HomeScreen",
         navNext = "navToSearchScreen",
-        navNextClick = { navController.navToSearchScreen() },
         navVertical = "navToSubgraph",
-        navVerticalClick = { navController.navToBookingFlow() }
+        onClickListener = { clickListener -> onClickListener(navController, clickListener) }
     )
+}
+
+private fun onClickListener(
+    navController: NavController,
+    clickListener: CommonViewClickListener
+): Unit = when (clickListener) {
+    CommonViewClickListener.HorizontalNavigationClick -> navController.navToSearchScreen()
+    CommonViewClickListener.VerticalNavigationClick -> navController.navToBookingFlow()
 }

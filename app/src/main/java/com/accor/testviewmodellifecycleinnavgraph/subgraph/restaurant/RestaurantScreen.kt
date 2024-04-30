@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import com.accor.testviewmodellifecycleinnavgraph.navToHomeScreen
 import com.accor.testviewmodellifecycleinnavgraph.navToRoomScreen
 import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonView
+import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonViewClickListener
 
 @Composable
 fun RestaurantScreen(
@@ -30,8 +31,15 @@ fun RestaurantContent(
     CommonView(
         screenName = "RestaurantScreen",
         navNext = "navToRoomScreen",
-        navNextClick = { navController.navToRoomScreen() },
         navVertical = "navToHomeScreen",
-        navVerticalClick = { navController.navToHomeScreen() }
+        onClickListener = { clickListener -> onClickListener(navController, clickListener) }
     )
+}
+
+private fun onClickListener(
+    navController: NavController,
+    clickListener: CommonViewClickListener
+): Unit = when (clickListener) {
+    CommonViewClickListener.HorizontalNavigationClick -> navController.navToRoomScreen()
+    CommonViewClickListener.VerticalNavigationClick -> navController.navToHomeScreen()
 }
