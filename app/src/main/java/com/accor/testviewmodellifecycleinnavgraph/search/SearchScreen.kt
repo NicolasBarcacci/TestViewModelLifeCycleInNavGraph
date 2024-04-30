@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.accor.testviewmodellifecycleinnavgraph.navToHomeScreen
+import com.accor.testviewmodellifecycleinnavgraph.navToSearchScreen
+import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonView
 
 @Composable
 fun SearchScreen(
@@ -28,12 +30,7 @@ fun SearchContent(
     navController: NavController,
     searchViewModel: SearchViewModel,
 ) {
-    Column {
-        Text("SearchScreen")
-        Button(onClick = {
-            navController.navToHomeScreen()
-        }) {
-            Text(text = "navToHomeScreen")
-        }
+    CommonView(screenName = "SearchScreen", textName = "navToHomeScreen") {
+        navController.navToHomeScreen()
     }
 }
