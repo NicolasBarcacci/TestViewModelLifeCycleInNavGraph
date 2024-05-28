@@ -1,6 +1,7 @@
 package com.accor.testviewmodellifecycleinnavgraph
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -8,74 +9,84 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.accor.testviewmodellifecycleinnavgraph.home.HomeScreen
-import com.accor.testviewmodellifecycleinnavgraph.search.SearchScreen
-import com.accor.testviewmodellifecycleinnavgraph.subgraph.hotel.HotelScreen
-import com.accor.testviewmodellifecycleinnavgraph.subgraph.restaurant.RestaurantScreen
-import com.accor.testviewmodellifecycleinnavgraph.subgraph.room.RoomScreen
+import com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen1.MainGraphScreen1
+import com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen2.MainGraphScreen2
+import com.accor.testviewmodellifecycleinnavgraph.subgraph.SubGraphScreen1.SubGraphScreen1
+import com.accor.testviewmodellifecycleinnavgraph.subgraph.SubGraphScreen3.SubGraphScreen3
+import com.accor.testviewmodellifecycleinnavgraph.subgraph.SubGraphScreen2.SubGraphScreen2
 
-private const val HomeScreen = "HomeScreen"
-private const val SearchScreen = "SearchScreen"
-private const val HotelScreen = "HotelScreen"
-private const val RoomScreen = "RoomScreen"
-private const val RestaurantScreen = "RestaurantScreen"
-private const val BookingFlow = "BookingFlow"
+const val MainGraphScreen1 = "MainGraphScreen1"
+const val MainGraphScreen2 = "MainGraphScreen2"
+const val SubGraph = "SubGraph"
+const val SubGraphScreen1 = "SubGraphScreen1"
+const val SubGraphScreen2 = "SubGraphScreen2"
+const val SubGraphScreen3 = "SubGraphScreen3"
 
 @Composable
 fun MainContent(
     activity: MainActivity,
 ) {
+    MainGraph(viewModelStoreOwner = activity)
+}
+
+@Composable
+private fun MainGraph(
+    viewModelStoreOwner: ViewModelStoreOwner,
+) {
     val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = HomeScreen) {
-        composable(HomeScreen) {
-            HomeScreen(navController = navController)
+    NavHost(navController = navController, startDestination = MainGraphScreen1) {
+        composable(MainGraphScreen1) {
+            MainGraphScreen1(navController = navController)
         }
-        composable(SearchScreen) {
-            SearchScreen(viewModelStoreOwner = activity, navController = navController)
+        composable(MainGraphScreen2) {
+            MainGraphScreen2(viewModelStoreOwner = viewModelStoreOwner, navController = navController)
         }
 
-        hotelNavGraph(navController)
+        subGraph(navController = navController, viewModelStoreOwner = viewModelStoreOwner)
     }
 }
 
-fun NavGraphBuilder.hotelNavGraph(navController: NavHostController) {
-    navigation(startDestination = HotelScreen, route = BookingFlow) {
-        composable(HotelScreen) {
-            HotelScreen(navController)
+fun NavGraphBuilder.subGraph(
+    navController: NavHostController,
+    viewModelStoreOwner: ViewModelStoreOwner,
+) {
+    navigation(startDestination = SubGraphScreen1, route = SubGraph) {
+        composable(SubGraphScreen1) {
+            SubGraphScreen1(navController)
         }
-        composable(RoomScreen) {
-            RoomScreen(navController)
+        composable(SubGraphScreen2) {
+            SubGraphScreen2(navController)
         }
-        composable(RestaurantScreen) {
-            RestaurantScreen(
-                navController.getViewModelStoreOwner(TODO()),
-                navController
+        composable(SubGraphScreen3) {
+            SubGraphScreen3(
+                //                navController.getViewModelStoreOwner(TODO())
+                viewModelStoreOwner = viewModelStoreOwner,
+                navController = navController
             )
         }
     }
 }
 
-fun NavController.navToHomeScreen() {
-    this.navigate(HomeScreen)
+fun NavController.navToMainGraphScreen1() {
+    this.navigate(MainGraphScreen1)
 }
 
-fun NavController.navToSearchScreen() {
-    this.navigate(SearchScreen)
+fun NavController.navToMainGraphScreen2() {
+    this.navigate(MainGraphScreen2)
 }
 
-fun NavController.navToBookingFlow() {
-    this.navigate(BookingFlow)
+fun NavController.navToSubGraph() {
+    this.navigate(SubGraph)
 }
 
-fun NavController.navToHotelScreen() {
-    this.navigate(HotelScreen)
+fun NavController.navToSubGraphScreen1() {
+    this.navigate(SubGraphScreen1)
 }
 
-fun NavController.navToRestaurantScreen() {
-    this.navigate(RestaurantScreen)
+fun NavController.navToSubGraphScreen2() {
+    this.navigate(SubGraphScreen2)
 }
 
-fun NavController.navToRoomScreen() {
-    this.navigate(RoomScreen)
+fun NavController.navToSubGraphScreen3() {
+    this.navigate(SubGraphScreen3)
 }
