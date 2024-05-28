@@ -14,7 +14,7 @@ import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonView
 @Composable
 fun MainGraphScreen2(
     viewModelStoreOwner: ViewModelStoreOwner,
-    navController: NavController
+    navController: NavController,
 ) {
     val mainGraphScreen2ViewModel: MainGraphScreen2ViewModel = viewModel(
         viewModelStoreOwner = viewModelStoreOwner,

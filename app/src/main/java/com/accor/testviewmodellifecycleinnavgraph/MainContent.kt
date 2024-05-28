@@ -1,6 +1,8 @@
 package com.accor.testviewmodellifecycleinnavgraph
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -12,8 +14,8 @@ import androidx.navigation.compose.rememberNavController
 import com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen1.MainGraphScreen1
 import com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen2.MainGraphScreen2
 import com.accor.testviewmodellifecycleinnavgraph.subgraph.SubGraphScreen1.SubGraphScreen1
-import com.accor.testviewmodellifecycleinnavgraph.subgraph.SubGraphScreen3.SubGraphScreen3
 import com.accor.testviewmodellifecycleinnavgraph.subgraph.SubGraphScreen2.SubGraphScreen2
+import com.accor.testviewmodellifecycleinnavgraph.subgraph.SubGraphScreen3.SubGraphScreen3
 
 const val MainGraphScreen1 = "MainGraphScreen1"
 const val MainGraphScreen2 = "MainGraphScreen2"
@@ -26,12 +28,12 @@ const val SubGraphScreen3 = "SubGraphScreen3"
 fun MainContent(
     activity: MainActivity,
 ) {
-    MainGraph(viewModelStoreOwner = activity)
+    MainGraph(activityViewModelStoreOwner = activity)
 }
 
 @Composable
 private fun MainGraph(
-    viewModelStoreOwner: ViewModelStoreOwner,
+    activityViewModelStoreOwner: ViewModelStoreOwner,
 ) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = MainGraphScreen1) {
@@ -39,28 +41,33 @@ private fun MainGraph(
             MainGraphScreen1(navController = navController)
         }
         composable(MainGraphScreen2) {
-            MainGraphScreen2(viewModelStoreOwner = viewModelStoreOwner, navController = navController)
+            MainGraphScreen2(viewModelStoreOwner = activityViewModelStoreOwner, navController = navController)
         }
 
-        subGraph(navController = navController, viewModelStoreOwner = viewModelStoreOwner)
+        subGraph(activityViewModelStoreOwner = activityViewModelStoreOwner, navController = navController)
     }
 }
 
 fun NavGraphBuilder.subGraph(
+    activityViewModelStoreOwner: ViewModelStoreOwner,
     navController: NavHostController,
-    viewModelStoreOwner: ViewModelStoreOwner,
 ) {
     navigation(startDestination = SubGraphScreen1, route = SubGraph) {
         composable(SubGraphScreen1) {
-            SubGraphScreen1(navController)
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(SubGraph)
+            }
+            SubGraphScreen1(navController, hiltViewModel(parentEntry))
         }
         composable(SubGraphScreen2) {
             SubGraphScreen2(navController)
         }
         composable(SubGraphScreen3) {
+            val parentEntry = remember(it) {
+                navController.getBackStackEntry(SubGraph)
+            }
             SubGraphScreen3(
-                //                navController.getViewModelStoreOwner(TODO())
-                viewModelStoreOwner = viewModelStoreOwner,
+                viewModelStoreOwner = parentEntry,
                 navController = navController
             )
         }

@@ -2,10 +2,13 @@ package com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen1
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 private var GlobalIndex = 0
 
-class MainGraphScreen1ViewModel : ViewModel() {
+@HiltViewModel
+class MainGraphScreen1ViewModel @Inject constructor() : ViewModel() {
 
     private val index: Int
 

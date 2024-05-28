@@ -1,7 +1,7 @@
 package com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen1
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen1
 import com.accor.testviewmodellifecycleinnavgraph.MainGraphScreen2
@@ -11,8 +11,10 @@ import com.accor.testviewmodellifecycleinnavgraph.navToSubGraph
 import com.accor.testviewmodellifecycleinnavgraph.ui.view.CommonView
 
 @Composable
-fun MainGraphScreen1(navController: NavController) {
-    val mainGraphScreen1ViewModel: MainGraphScreen1ViewModel = viewModel()
+fun MainGraphScreen1(
+    navController: NavController,
+) {
+    val mainGraphScreen1ViewModel: MainGraphScreen1ViewModel = hiltViewModel()
     HomeContent(
         navController = navController,
         mainGraphScreen1ViewModel = mainGraphScreen1ViewModel
